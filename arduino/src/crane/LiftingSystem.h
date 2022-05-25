@@ -2,16 +2,16 @@
 
 class LiftingSystem {
     public:
-        LiftingSystem(int raiseButtonPin, int lowerButtonPin, int servoPin);
+        LiftingSystem(int servoPin);
         void setup();
-        void cycle();
+        void startRaising();
+        void stopRaising();
+        void startLowering();
+        void stopLowering();
+        void loop();
 
     private:
-        int raiseButtonPin;
-        int lowerButtonPin;
         int servoPin;
-        int stopAngle;
-        int raiseAngle;
-        int lowerAngle;
+        int state;
         ContinuousServo* servo;
 };

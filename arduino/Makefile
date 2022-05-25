@@ -1,4 +1,4 @@
-PORT=/dev/ttyUSB0
+PORT=/dev/ttyACM0
 TARGET_DIR=build/crane
 ARDUINO=arduino --pref build.path=${TARGET_DIR} --board arduino:avr:uno --port ${PORT}
 

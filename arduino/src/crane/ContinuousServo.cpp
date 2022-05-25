@@ -2,37 +2,34 @@
 #include "Arduino.h"
 #include "ContinuousServo.h"
 
+const int defaultStep = 5;
+const int stopAngle = 89;
 ContinuousServo::ContinuousServo(int servoPin) {
     this->servoPin = servoPin;
-    this->servo.attach(servoPin);
 }
 
 void ContinuousServo::setup() {
-    this->stopAngle = servo.read(); // read the angle which will never change as potentiometer is unplugged
-    this->clockwiseAngle = 150;
-    this->counterClockwiseAngle = 20;
+    this->servo.attach(servoPin);
+    this->initAngle = servo.read();
     
-    Serial.print("stop angle: ");
-    Serial.println(this->stopAngle);
+    Serial.print("Init angle: ");
+    Serial.println(this->initAngle);
 }
 
 void ContinuousServo::rotate(bool clockwise) {  
+    int currentAngle = servo.read();
+    Serial.print("Current angle: ");
+    Serial.println(currentAngle);
     if(clockwise) {
-        Serial.println("Rotating clockwise with angle: ");
-        Serial.println(this->clockwiseAngle);
-        int pos;
-        for (pos = this->stopAngle; pos <= 180; pos += 1) {
-          this->servo.write(pos);
-          delay(15);
-        }
-        
+        Serial.println("Rotating clockwise");
+        this->servo.write(stopAngle+5);
     } else {
-        Serial.println("Rotating counter clockwise with angle: ");
-        Serial.println(this->counterClockwiseAngle);
-        this->servo.write(this->clockwiseAngle);
+        Serial.println("Rotating counter clockwise");
+        this->servo.write(stopAngle-5);
     }
+    delay(15);
 }
 
 void ContinuousServo::stop() {
-    this->servo.write(this->stopAngle);
+    this->servo.write(stopAngle);
 }

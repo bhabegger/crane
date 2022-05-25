@@ -1,16 +1,29 @@
 #include<Servo.h>
+#include "Button.h"
 #include "LiftingSystem.h"
 
-LiftingSystem liftingSystem(
-    4, // Raise pin
-    5, // Lower pin
-    9  // Servo pin
-);
+LiftingSystem liftingSystem(9);
+Button btnLiftUp(4);
+Button btnLiftDown(5);
 
 void setup() {
+    Serial.begin(115200);
+    Serial.println("Setting up...");
     liftingSystem.setup();
+
+    btnLiftUp.setup();
+    btnLiftUp.onPress([&](){ liftingSystem.startRaising(); });
+    btnLiftUp.onRelease([&](){ liftingSystem.stopRaising(); });
+
+    btnLiftDown.setup();
+    btnLiftDown.onPress([&](){ liftingSystem.startLowering(); });
+    btnLiftDown.onRelease([&](){ liftingSystem.startLowering(); });
+    
+    Serial.println("Done.");
 }
 
 void loop() {
-    liftingSystem.cycle();
+    btnLiftUp.loop();
+    btnLiftDown.loop();
+    liftingSystem.loop();
 }

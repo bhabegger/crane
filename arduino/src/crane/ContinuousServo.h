@@ -9,8 +9,6 @@ class ContinuousServo {
 
     private:
         int servoPin;
-        int stopAngle;
-        int clockwiseAngle;
-        int counterClockwiseAngle;
+        int initAngle;
         Servo servo;
 };

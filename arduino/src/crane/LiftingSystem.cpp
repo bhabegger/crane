@@ -2,27 +2,33 @@
 #include "Servo.h"
 #include "LiftingSystem.h"
 
-LiftingSystem::LiftingSystem(int raiseButtonPin, int lowerButtonPin, int servoPin) {
-    this->raiseButtonPin = raiseButtonPin;
-    this->lowerButtonPin = lowerButtonPin;
+LiftingSystem::LiftingSystem(int servoPin) {
     this->servo = new ContinuousServo(servoPin);
 }
 
 void LiftingSystem::setup() {
-    pinMode(this->raiseButtonPin, INPUT);
-    pinMode(this->lowerButtonPin, INPUT);
     this->servo->setup();
 }
 
-void LiftingSystem::cycle() {
-    int raiseNewState = digitalRead(this->raiseButtonPin);
-    int lowerNewState = digitalRead(this->lowerButtonPin);
+void LiftingSystem::startRaising() {
+    Serial.print("Start Raising");
+    this->servo->rotate(true);
+}
 
-    if(raiseNewState == lowerNewState) {
-        this->servo->stop();
-    } else if(raiseNewState == HIGH) {
-        this->servo->rotate(true);
-    } else if(lowerNewState == HIGH) {
-        this->servo->rotate(false);
-    }
+void LiftingSystem::stopRaising() {
+    Serial.print("Stop Raising");
+    this->servo->stop();
+}
+
+void LiftingSystem::startLowering() {
+    Serial.print("Start Lowering");
+    this->servo->rotate(false);
+}
+
+void LiftingSystem::stopLowering() {
+    Serial.print("Stop Lowering");
+    this->servo->stop();
+}
+
+void LiftingSystem::loop() {
 }
