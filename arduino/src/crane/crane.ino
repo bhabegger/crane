@@ -17,7 +17,7 @@ void setup() {
 
     btnLiftDown.setup();
     btnLiftDown.onPress([&](){ liftingSystem.startLowering(); });
-    btnLiftDown.onRelease([&](){ liftingSystem.startLowering(); });
+    btnLiftDown.onRelease([&](){ liftingSystem.stopLowering(); });
     
     Serial.println("Done.");
 }

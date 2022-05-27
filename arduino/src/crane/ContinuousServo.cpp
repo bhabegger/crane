@@ -2,18 +2,22 @@
 #include "Arduino.h"
 #include "ContinuousServo.h"
 
-const int defaultStep = 5;
-const int stopAngle = 89;
+const int defaultStep = 10;
+const int stopAngle = 87;
 ContinuousServo::ContinuousServo(int servoPin) {
     this->servoPin = servoPin;
 }
 
 void ContinuousServo::setup() {
     this->servo.attach(servoPin);
+    delay(1000);
+
     this->initAngle = servo.read();
     
     Serial.print("Init angle: ");
     Serial.println(this->initAngle);
+
+    this->servo.write(stopAngle);
 }
 
 void ContinuousServo::rotate(bool clockwise) {  
@@ -22,10 +26,10 @@ void ContinuousServo::rotate(bool clockwise) {
     Serial.println(currentAngle);
     if(clockwise) {
         Serial.println("Rotating clockwise");
-        this->servo.write(stopAngle+5);
+        this->servo.write(stopAngle-defaultStep);
     } else {
         Serial.println("Rotating counter clockwise");
-        this->servo.write(stopAngle-5);
+        this->servo.write(stopAngle+defaultStep);
     }
     delay(15);
 }
