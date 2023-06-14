@@ -21,7 +21,7 @@ void RemoteControl::setup() {
     Serial.println(this->pin);
 }
 
-void RemoteControl::onCommand(int commandCode, void (*callback)()) {
+void RemoteControl::onCommand(int commandCode, ActionPtr callback) {
     Serial.print("Setting onCommand callback on remote control pin ");
     Serial.print(this->pin);
     Serial.print(" for command ");
@@ -37,7 +37,7 @@ void RemoteControl::loop() {
         if (IrReceiver.decodedIRData.address == 0) {
             Serial.print("Received ");
             Serial.println(IrReceiver.decodedIRData.command);
-            arx::map<int,void (*)()>::iterator it = this->commandMap.find(IrReceiver.decodedIRData.command);
+            arx::map<int,ActionPtr>::iterator it = this->commandMap.find(IrReceiver.decodedIRData.command);
             if(it != this->commandMap.end()) {
                 Serial.print("Executing command for code ");
                 Serial.println(it->first);

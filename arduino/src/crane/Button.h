@@ -1,14 +1,16 @@
+#include "Action.h"
+
 class Button {
     public:
         Button(int pin);
         void setup();
         void loop();
-        void onPress(void (*)());
-        void onRelease(void (*)());
+        void onPress(ActionPtr);
+        void onRelease(ActionPtr);
 
     private:
         int pin;
         int state;
-        void (*onPressCallback)();
-        void (*onReleaseCallback)();
+        ActionPtr onPressCallback;
+        ActionPtr onReleaseCallback;
 };

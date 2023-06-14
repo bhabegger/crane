@@ -1,3 +1,4 @@
+#include "Action.h"
 #include "ArxContainer.h"
 #define DECODE_NEC
 
@@ -24,9 +25,9 @@ class RemoteControl {
         RemoteControl(int pin);
         void setup();
         void loop();
-        void onCommand(int, void (*)());
+        void onCommand(int, ActionPtr);
 
     private:
         int pin;
-        arx::map<int, void (*)()> commandMap;
+        arx::map<int, ActionPtr> commandMap;
 };

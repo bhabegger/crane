@@ -15,14 +15,14 @@ void Button::setup() {
     Serial.println(this->state);
 }
 
-void Button::onPress(void (*callback)()) {
+void Button::onPress(ActionPtr callback) {
     Serial.print("Setting onPress callback for button pin ");
     Serial.print(this->pin);
     Serial.println(".");
     this->onPressCallback = callback;
 }
 
-void Button::onRelease(void (*callback)()) {
+void Button::onRelease(ActionPtr callback) {
     Serial.print("Setting onRelease callback for button pin ");
     Serial.print(this->pin);
     Serial.println(".");
