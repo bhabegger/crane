@@ -9,7 +9,7 @@ RotatingSystem*     rotatingSystem    = new StepperRotatingSystem(8,9,10,11);
 TranslatingSystem*  translatingSystem = new ServoTranslatingSystem(3);
 
 RemoteControl       remoteControl(2);
-
+int loopCount = 0;
 void setup() {
     Serial.begin(115200);
     Serial.println("Setting up...");
@@ -33,33 +33,41 @@ void setup() {
 }
 
 void startRaisingAction() {
+    Serial.println("Raising");
     liftingSystem->startRaising();
 }
 
 void startLoweringAction() {
+    Serial.println("Lowering");
     liftingSystem->startLowering();
 }
 
 void stopLiftingAction() {
+    Serial.println("Stopping lifting");
     liftingSystem->stop();
 }
 
 void startRotatingClockwise() {
+    Serial.println("Rotating ->");
     rotatingSystem->startRotatingClockwise();
 }
 
 void startRotatingCounterClockwise() {
+    Serial.println("Rotating <-");
     rotatingSystem->startRotatingCounterClockwise();
 }
 void startMovingForwardAction() {
+    Serial.println("Forward");
     translatingSystem->startMovingForward();
 }
 
 void startMovingBackwardAction() {
+    Serial.println("Backward");
     translatingSystem->startMovingBackward();
 }
 
 void stopAllAction() {
+    Serial.println("Stop");
     liftingSystem->stop();
     translatingSystem->stop();
     rotatingSystem->stop();

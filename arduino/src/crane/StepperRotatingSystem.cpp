@@ -5,14 +5,15 @@ StepperRotatingSystem::StepperRotatingSystem(int pin1, int pin2, int pin3, int p
 }
 
 void StepperRotatingSystem::setup() {
-  this->stepper->setMaxSpeed(200.0);
-  this->stepper->setAcceleration(100.0);
-  this->counterClockwiseExtreme = 0;
-  this->clockwiseExtreme = 200;
+  this->stepper->setMaxSpeed(2100.0);
+  this->stepper->setAcceleration(300.0);
+  this->counterClockwiseExtreme = -2048;
+  this->clockwiseExtreme = 2048;
 }
 
 void StepperRotatingSystem::startRotatingClockwise() {
-  this->stepper->moveTo(clockwiseExtreme);
+
+    this->stepper->moveTo(clockwiseExtreme);
 }
 
 void StepperRotatingSystem::startRotatingCounterClockwise() {

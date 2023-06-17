@@ -12,4 +12,4 @@ upload: install-deps
 	${ARDUINO} --upload src/crane/crane.ino
 
 install-deps:
-	${ARDUINO} --install-library Servo
+	# ${ARDUINO} --install-library Servo
