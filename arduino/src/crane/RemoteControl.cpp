@@ -31,20 +31,21 @@ void RemoteControl::onCommand(int commandCode, ActionPtr callback) {
 }
 
 void RemoteControl::loop() {
-      if (IrReceiver.decode()) {
-        IrReceiver.resume();
-        if (IrReceiver.decodedIRData.address == 0) {
-          int command = IrReceiver.decodedIRData.command;
-          if(command != 0) {
-            Serial.print("Received ");
-            Serial.println(command);
-            arx::map<int,ActionPtr>::iterator it = this->commandMap.find(command);
-            if(it != this->commandMap.end()) {
-                Serial.print("Executing command for code ");
-                Serial.println(it->first);
-                it->second();
-            }
-          }
+  if (IrReceiver.decode()) {
+    IrReceiver.resume();
+    if(IrReceiver.decodedIRData.protocol != UNKNOWN) {
+      IrReceiver.printIRResultShort(&Serial, true);
+      int command = IrReceiver.decodedIRData.command;
+      if(command != 0) {
+        Serial.print("Received ");
+        Serial.println(command);
+        arx::map<int,ActionPtr>::iterator it = this->commandMap.find(command);
+        if(it != this->commandMap.end()) {
+            Serial.print("Executing command for code ");
+            Serial.println(it->first);
+            it->second();
         }
+      }
     }
+  }
 }

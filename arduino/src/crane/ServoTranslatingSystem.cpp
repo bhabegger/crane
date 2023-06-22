@@ -9,11 +9,11 @@ void ServoTranslatingSystem::setup() {
 }
 
 void ServoTranslatingSystem::startMovingForward() {
-    this->servo->rotate(true);
+   this->servo->rotate(false);
 }
 
 void ServoTranslatingSystem::startMovingBackward() {
-    this->servo->rotate(false);
+  this->servo->rotate(true);
 }
 
 void ServoTranslatingSystem::stop() {
@@ -21,4 +21,5 @@ void ServoTranslatingSystem::stop() {
 }
 
 void ServoTranslatingSystem::loop() {
+
 }

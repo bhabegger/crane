@@ -19,13 +19,14 @@ void setup() {
     Serial.println(__DATE__);
 
     liftingSystem->setup();
+    translatingSystem->setup();
 
-    remoteControl.onCommand(REMOTE_UP, startRaisingAction);
-    remoteControl.onCommand(REMOTE_DOWN, startLoweringAction);
+    remoteControl.onCommand(REMOTE_VOL_UP, startRaisingAction);
+    remoteControl.onCommand(REMOTE_VOL_DOWN, startLoweringAction);
     remoteControl.onCommand(REMOTE_LEFT, startRotatingClockwise);
     remoteControl.onCommand(REMOTE_RIGHT, startRotatingCounterClockwise);
-    remoteControl.onCommand(REMOTE_5, startMovingForwardAction);
-    remoteControl.onCommand(REMOTE_0, startMovingBackwardAction);
+    remoteControl.onCommand(REMOTE_UP, startMovingForwardAction);
+    remoteControl.onCommand(REMOTE_DOWN, startMovingBackwardAction);
     remoteControl.onCommand(REMOTE_OK, stopAllAction);
     remoteControl.setup();
 
