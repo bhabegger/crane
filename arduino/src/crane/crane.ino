@@ -2,11 +2,11 @@
 #include "RemoteControl.h"
 #include "StepperLiftingSystem.h"
 #include "StepperRotatingSystem.h"
-#include "ServoTranslatingSystem.h"
+#include "StepperTranslatingSystem.h"
 
 LiftingSystem*      liftingSystem     = new StepperLiftingSystem(4,5,6,7);
 RotatingSystem*     rotatingSystem    = new StepperRotatingSystem(8,9,10,11);
-TranslatingSystem*  translatingSystem = new ServoTranslatingSystem(3);
+TranslatingSystem*  translatingSystem = new StepperTranslatingSystem(24,26,28,30);
 
 RemoteControl       remoteControl(2);
 int loopCount = 0;
@@ -20,6 +20,7 @@ void setup() {
 
     liftingSystem->setup();
     translatingSystem->setup();
+    rotatingSystem->setup();
 
     remoteControl.onCommand(REMOTE_VOL_UP, startRaisingAction);
     remoteControl.onCommand(REMOTE_VOL_DOWN, startLoweringAction);

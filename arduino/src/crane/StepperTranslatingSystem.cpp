@@ -1,8 +1,8 @@
 #define HALFSTEP 8
-#include "StepperLiftingSystem.h"
+#include "StepperTranslatingSystem.h"
 
-StepperLiftingSystem::StepperLiftingSystem(int pin1, int pin2, int pin3, int pin4) {
-  Serial.print("StepperLiftingSystem using PINS: ");
+StepperTranslatingSystem::StepperTranslatingSystem(int pin1, int pin2, int pin3, int pin4) {
+  Serial.print("StepperTranslatingSystem using PINS: ");
   Serial.print(pin1);
   Serial.print(" ");
   Serial.print(pin2);
@@ -13,40 +13,40 @@ StepperLiftingSystem::StepperLiftingSystem(int pin1, int pin2, int pin3, int pin
   this->stepper = new AccelStepper(HALFSTEP, pin1, pin3, pin2, pin4);
 }
 
-void StepperLiftingSystem::setup() {
-  Serial.print("StepperLiftingSystem setup: ");
+void StepperTranslatingSystem::setup() {
+  Serial.print("StepperTranslatingSystem setup: ");
 
-  this->top = 16960;
-  this->bottom = -16960;
+  this->front = 16960;
+  this->rear = -16960;
 
   this->stepper->setMaxSpeed(1800.0);
   this->stepper->setAcceleration(200.0);
   this->stepper->setSpeed(1800.0);
   this->stepper->setCurrentPosition(0);
-
+  
   Serial.println("DONE");
 }
 
-void StepperLiftingSystem::startRaising() {  
-  Serial.print("Start Raising");
+void StepperTranslatingSystem::startMovingForward() {
+  Serial.print("Start moving forward");
   this->stepper->setSpeed(2100.0);
   this->stepper->setCurrentPosition(0);
-  this->stepper->moveTo(this->top);
+  this->stepper->moveTo(this->front);
 }
 
-void StepperLiftingSystem::startLowering() {
-   Serial.print("Start Lowering");
+void StepperTranslatingSystem::startMovingBackward() {
+   Serial.print("Start moving backward");
    this->stepper->setSpeed(2100.0);
    this->stepper->setCurrentPosition(0);
-   this->stepper->moveTo(this->bottom);
+   this->stepper->moveTo(this->rear);
 }
 
-void StepperLiftingSystem::stop() {  
+void StepperTranslatingSystem::stop() {  
   Serial.print("Stopping");
   this->stepper->setSpeed(0.0);
   this->stepper->stop();
 }
 
-void StepperLiftingSystem::loop() {
+void StepperTranslatingSystem::loop() {
   this->stepper->run();
 }

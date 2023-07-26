@@ -1,6 +1,6 @@
 PORT=/dev/ttyACM0
 TARGET_DIR=build/crane
-ARDUINO=arduino --pref build.path=${TARGET_DIR} --board arduino:avr:uno --port ${PORT}
+ARDUINO=arduino --pref build.path=${TARGET_DIR} --board arduino:avr:mega:cpu=atmega2560 --port ${PORT}
 
 verify: install-deps
 	mkdir -p ${TARGET_DIR}
